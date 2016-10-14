@@ -1,0 +1,1 @@
+Zed A. Shaw is a software developer most commonly known for creating the Mongrel web server for Ruby web applications
