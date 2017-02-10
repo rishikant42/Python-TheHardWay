@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import csv
+from sys import argv
 
 def rowCounting(fileName):
 
@@ -10,4 +11,7 @@ def rowCounting(fileName):
     for row in readFile:
         print('Row #' + str(readFile.line_num) + ' ' + str(row))
 
-rowCounting('example.csv')
+try:
+    rowCounting(argv[1])
+except IndexError:
+    print "ERROR: Pass csv file from command line"
