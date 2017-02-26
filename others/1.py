@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 a = raw_input('file1?')
 x = open(a)
 print x.read()
