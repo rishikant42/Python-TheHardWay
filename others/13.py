@@ -14,3 +14,6 @@ def fact2(n):
 
 print fact1(6)
 print fact2(6)
+
+import math
+print math.factorial(6)
