@@ -4,7 +4,7 @@ def fib1(n):
     else:
         return fib1(n-1) + fib1(n-2)
 
-print fib1(36)
+#print fib1(36)
 
 fibcache = {}
 def fib2(n):
@@ -19,3 +19,12 @@ def fib2(n):
         return fibcache[n]
 
 print fib2(36)
+
+# fast method
+def fib3(n):
+    a,b = 1,1
+    for i in range(n-1):
+        a,b = b,a+b
+    return a
+
+print fib3(36)
