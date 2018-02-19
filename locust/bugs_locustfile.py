@@ -109,6 +109,19 @@ class MyTaskSet(TaskSet):
         response = self.client.post("issues.json/", data, headers=headers)
         print "Create-Issue-Api-Status: %s" %(response.status_code)
 
+    # @task
+    def delete_issues(self):
+        api_key = os.environ.get("TRACKER_CHUMBAK_API")
+        headers = {'X-Redmine-API-Key': api_key}
+        response = self.client.get("issues.json/", headers=headers).json()
+        issues = response.get("issues")
+
+        for issue in issues:
+            iid = issue.get("id")
+            if iid not in [22, 21]:
+                api = "issues/{}.json".format(iid)
+                response = self.client.delete(api, headers=headers)
+                print "Delete-Issue-Api-Status: %s" %(response.status_code)
 
     @task(1)
     def activity(self):
@@ -141,7 +154,7 @@ class MyTaskSet(TaskSet):
 
 class WebsiteUser(HttpLocust):
     host = "https://bugs.chumbak.com/"
-    #host = "http://127.0.0.1:8888/"
+    # host = "http://127.0.0.1:3000/"
     task_set = MyTaskSet
     min_wait = 5000
     max_wait = 9000
