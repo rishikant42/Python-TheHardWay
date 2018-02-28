@@ -2,7 +2,11 @@ import os
 import requests
 import json
 import string
+import csv
 from random import choice
+from time import sleep
+
+from skip_emails import skip_email_list
 
 def home(host, api_key, headers):
     home_api = host
@@ -127,20 +131,18 @@ def get_random_user(host, api_key, headers):
     response = requests.get(random_user_api, headers=headers)
     print "Get-User-Api-Status: %s" %(response.status_code)
 
-def create_user(host, api_key, headers):
+def create_user(host, api_key, headers, mail, firstname, lastname):
     list_users_api = host + "users.json"
     r = requests.get(list_users_api, headers=headers).json()
     users = r.get("users")
     existing_login = [i.get('login') for i in users]
 
-    mail = 'rksbtp@gmail.com'
-    login = mail.split('@', 1)[0]
-
-    if login in existing_login: login = login + ''.join(choice(string.ascii_lowercase) for i in range(2))
+    login = firstname.replace(' ', '').lower()
+    if login in existing_login: login = login + ''.join(choice(string.ascii_lowercase) for i in range(3))
 
     user = {"login":login,
-            "firstname":login,
-            "lastname":"lastname",
+            "firstname":firstname,
+            "lastname":lastname,
             "mail":mail,
             "password": "tracker@123",
             "must_change_passwd": "true"}
@@ -148,7 +150,10 @@ def create_user(host, api_key, headers):
     data = json.dumps({"user": user, "send_information": "true"})
     create_user_api = host + "users.json"
     response = requests.post(create_user_api, data=data, headers=headers)
-    print "Email: %s, Api-Response: %s" %(mail, response.status_code)
+    if response.status_code != 201:
+        print "\n\nHey Pls try to create my account again. Email: %s, Api-Response: %s\n" %(mail, response.status_code)
+    else:
+        print "Email: %s, Api-Response: %s" %(mail, response.status_code)
 
 def filter_user(host, api_key, headers, emails_list):
     list_users_api = host + "users.json"
@@ -160,18 +165,65 @@ def filter_user(host, api_key, headers, emails_list):
     return new_users, existing_users
 
 
-# Local host api call
-host = "http://127.0.0.1:3000/"
-api_key = os.environ.get("TRACKER_LOCAL_API")
+def filter_email_from_csv(incsv):
+    users_email = []
+    with open(incsv) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            #if not row['LastName']: row['LastName']='last_name'
+            #users.append({'fname': row['FirstName'], 'lname': row['LastName'], 'mail': row['UserPrincipalName']})
+            users_email.append(row['UserPrincipalName'])
+    return users_email
 
-# bugs portal api call
-#host = "https://bugs.chumbak.com/"
-#api_key = os.environ.get("TRACKER_CHUMBAK_API")
+def email_firstname_map(incsv):
+    email_firstname_map = {}
+    with open(incsv) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            email_firstname_map[row['UserPrincipalName']] = row['FirstName']
+    return email_firstname_map
+
+def email_lastname_map(incsv):
+    email_lastname_map = {}
+    with open(incsv) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if not row['LastName']: row['LastName']='lastname'
+            email_lastname_map[row['UserPrincipalName']] = row['LastName']
+    return email_lastname_map
+
+# Local host api call
+# host = "http://127.0.0.1:3000/"
+# api_key = os.environ.get("TRACKER_LOCAL_API")
+
+#bugs portal api call
+host = "https://bugs.chumbak.com/"
+api_key = os.environ.get("TRACKER_CHUMBAK_API")
 
 # set required headers
 headers = {'X-Redmine-API-Key': api_key, 'Content-type': 'application/json'}
 
-# APIs
+skip_email = skip_email_list()
+
+users_email = filter_email_from_csv('users.csv')
+
+email_lastname_map = email_lastname_map('users.csv')
+
+email_firstname_map = email_firstname_map('users.csv')
+
+new_user_email, existing_user = filter_user(host, api_key, headers, users_email)
+
+for mail in new_user_email:
+    firstname = email_firstname_map.get(mail, "firstname")
+    lastname = email_lastname_map.get(mail, "lastname")
+    sleep(10)
+    if mail not in skip_email:
+        print "Hello"
+        # create_user(host, api_key, headers, mail, firstname, lastname)
+        print "World"
+
+
+# Other Userful APIs
 #home(host, api_key, headers)
 #list_projects(host, api_key, headers)
 #get_random_project(host, api_key, headers)
@@ -183,7 +235,4 @@ headers = {'X-Redmine-API-Key': api_key, 'Content-type': 'application/json'}
 #delete_issues(host, api_key, headers)
 #list_users(host, api_key, headers)
 #get_random_user(host, api_key, headers)
-create_user(host, api_key, headers)
-
-#emails_list = ['rksbtp@gmail.com', 'rshkntshrm@gmail.com']
-#filter_user(host, api_key, headers, emails_list)
+#create_user(host, api_key, headers, 'rksbtp@gmail.com', 'rishi', 'kant')
