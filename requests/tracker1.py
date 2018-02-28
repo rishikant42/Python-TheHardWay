@@ -110,6 +110,55 @@ def delete_issues(host, api_key, headers):
             response = requests.delete(api, headers=headers)
             print "Delete-Issue-Api-Status: %s" %(response.status_code)
 
+def list_users(host, api_key, headers):
+    list_users_api = host + "users.json"
+    r = requests.get(list_users_api, headers=headers)
+    print "List-Users-Api-Response: %s" %(r.status_code)
+
+
+def get_random_user(host, api_key, headers):
+    list_users_api = host + "users.json"
+    r = requests.get(list_users_api, headers=headers).json()
+
+    users = r.get("users")
+    random_user = choice(users)
+    pid = random_user.get("id")
+    random_user_api = host + "users/{}.json".format(pid)
+    response = requests.get(random_user_api, headers=headers)
+    print "Get-User-Api-Status: %s" %(response.status_code)
+
+def create_user(host, api_key, headers):
+    list_users_api = host + "users.json"
+    r = requests.get(list_users_api, headers=headers).json()
+    users = r.get("users")
+    existing_login = [i.get('login') for i in users]
+
+    mail = 'rksbtp@gmail.com'
+    login = mail.split('@', 1)[0]
+
+    if login in existing_login: login = login + ''.join(choice(string.ascii_lowercase) for i in range(2))
+
+    user = {"login":login,
+            "firstname":login,
+            "lastname":"lastname",
+            "mail":mail,
+            "password": "tracker@123",
+            "must_change_passwd": "true"}
+
+    data = json.dumps({"user": user, "send_information": "true"})
+    create_user_api = host + "users.json"
+    response = requests.post(create_user_api, data=data, headers=headers)
+    print "Email: %s, Api-Response: %s" %(mail, response.status_code)
+
+def filter_user(host, api_key, headers, emails_list):
+    list_users_api = host + "users.json"
+    r = requests.get(list_users_api, headers=headers).json()
+    users = r.get("users")
+
+    existing_users = [i.get('mail') for i in users]
+    new_users = [email for email in emails_list if email not in existing_users]
+    return new_users, existing_users
+
 
 # Local host api call
 host = "http://127.0.0.1:3000/"
@@ -123,12 +172,18 @@ api_key = os.environ.get("TRACKER_LOCAL_API")
 headers = {'X-Redmine-API-Key': api_key, 'Content-type': 'application/json'}
 
 # APIs
-home(host, api_key, headers)
-list_projects(host, api_key, headers)
-get_random_project(host, api_key, headers)
-create_project(host, api_key, headers)
+#home(host, api_key, headers)
+#list_projects(host, api_key, headers)
+#get_random_project(host, api_key, headers)
+#create_project(host, api_key, headers)
 #delete_projects(host, api_key, headers)
-list_issues(host, api_key, headers)
-get_random_issue(host, api_key, headers)
-create_issue(host, api_key, headers)
+#list_issues(host, api_key, headers)
+#get_random_issue(host, api_key, headers)
+#create_issue(host, api_key, headers)
 #delete_issues(host, api_key, headers)
+#list_users(host, api_key, headers)
+#get_random_user(host, api_key, headers)
+create_user(host, api_key, headers)
+
+#emails_list = ['rksbtp@gmail.com', 'rshkntshrm@gmail.com']
+#filter_user(host, api_key, headers, emails_list)
