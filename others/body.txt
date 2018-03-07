@@ -1,0 +1,17 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "87619969-c393-5b64-8ae4-ca73fad40414",
+  "TopicArn" : "arn:aws:sns:us-east-2:610694758619:ssn_test",
+  "Subject" : "mynewsubject",
+  "Message" : "{\n    \"ReleaeEnvironment\": \"Live\",\n    \"MarketplaceID\": \"220451\",\n    \"Version\": \"2013-01-01\",\n    \"NotificationType\": \"OrderReferenceNotification\",\n    \"SellerId\": \"A3GEDG4FJC14BQ\",\n    \"NotificationReferenceId\": \"f80ab4f0-82ca-42c8-a0d1-9b07f5b3fa30\",\n    \"Timestamp\": \"2017-02-17T09:15:18.679Z\",\n    \"NotificationData\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><ChargeTransactionNotification xmlns=\\\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\\\"><ChargeTransactionDetails><OrderID>P04-5366666-6431174<\\/OrderID><SellerReferenceId>test<\\/SellerReferenceId><Amount><Amount>10.0<\\/Amount><CurrencyCode>INR<\\/CurrencyCode><\\/Amount><TotalFee> <Amount>0.0<\\/Amount> <CurrencyCode>INR<\\/CurrencyCode><\\/TotalFee><PaymentModes/><FeeBreakup/><CreationTimestamp>2017-02-17T09:00:13.592Z<\\/CreationTimestamp> <Status> <State>Declined<\\/State> <LastUpdateTimestamp>2017-02-17T09:15:13.879Z<\\/LastUpdateTimestamp> <ReasonCode>SessionExpired<\\/ReasonCode><ReasonDescription>Session Expired<\\/ReasonDescription> <\\/Status><\\/ChargeTransactionDetails><\\/ChargeTransactionNotification>\"\n}",
+  "Timestamp" : "2018-03-07T19:01:27.341Z",
+  "SignatureVersion" : "1",
+  "Signature" : "TCKAunVkFoV89DGeobdGDnWtW0yHkCjOpxNMQDbtoz1IKxkRKRzYc7f4MA/nkmgFyDYGqzG386ZizgJuuCaTj3jTpBvQQH90GRpdeyVuiTjnZdasvwdq11/oIAsX48P9qiXCF5DPVY55pmBNbvFFxPp8oOaETcGtCmjckLCffyMMNmPI1cwChr7TtOATNxIfmne1tPiIL25HE+rxAo7fzOj+m7iQU05AI4oq8Y1QfmvHaQvMWNcVPaHq6yXWigcc242X1jqaLbPA7mKR3e57/JujymOcfWhFU6cx2lH148AuevUKL6IWjeQNlHVQYZcwxoQluY+X9qZjMppZsl+RKw==",
+  "SigningCertURL" : "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:610694758619:ssn_test:bdef1e4e-92c2-473a-806f-ba10d6a3edf5",
+  "MessageAttributes" : {
+    "AWS.SNS.MOBILE.MPNS.Type" : {"Type":"String","Value":"token"},
+    "AWS.SNS.MOBILE.MPNS.NotificationClass" : {"Type":"String","Value":"realtime"},
+    "AWS.SNS.MOBILE.WNS.Type" : {"Type":"String","Value":"wns/badge"}
+  }
+}
