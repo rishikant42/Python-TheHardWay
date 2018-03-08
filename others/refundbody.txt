@@ -1,0 +1,17 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "e0ebfd5f-162a-57d8-b337-ae45d34121ca",
+  "TopicArn" : "arn:aws:sns:us-east-2:610694758619:ssn_test",
+  "Subject" : "newsuuu",
+  "Message" : "{\n    \"ReleaseEnvironment \": \"Live\",\n    \"MarketplaceID \": \"220451 \",\n    \"Version \": \" 2013 - 01 - 01 \",\n    \"NotificationType \": \"PaymentRefund\",\n    \"SellerId \": \"A28RUGPVUTQXU1 \",\n    \"NotificationReferenceId \": \"8fc521ee-ba9d-40c9-a64d-be10117e3f58 \",\n    \"Timestamp \": \"2017 - 01 - 30 T10: 50: 16.880 Z \",\n    \"NotificationData\": \"<?xml version = \\\"1.0\\\" encoding=\\\"UTF-8\\\"?><RefundTransactionNotification xmlns = \\\"https://mws.amazonservices.com/ipn/OffAmazonPayments/2013-01-01\\\"><RefundTransactionDetails> <RefundTransactionId>P04-3975959-6325632-R067318<\\/RefundTransactionId ><RefundReferenceId> test <\\/RefundReferenceId><RefundType>SellerInitiated<\\/RefundType><PaymentModes><Id>NetBanking<\\/Id><\\/PaymentModes><Amount>  <Amount>5.0<\\/Amount>     <CurrencyCode>INR<\\/CurrencyCode> <\\/Amount> <Fee>    <Amount > 0.0 <\\/Amount> <CurrencyCode>INR<\\/CurrencyCode> <\\/Fee><CreationTimestamp>2017-01-30T10:47:45.506Z<\\/CreationTimestamp> <Status><State > Completed <\\/State><LastUpdateTimestamp>2017-01-30T10:50:11.109Z<\\/LastUpdateTimestamp> <\\/Status><\\/RefundTransactionDetails><\\/RefundTransactionNotification >\"\n}",
+  "Timestamp" : "2018-03-08T04:59:23.836Z",
+  "SignatureVersion" : "1",
+  "Signature" : "JDAlrexmngKkH2VLDMtS4ET+mnwlCrxtV66LZUn1BQiH6I7RN9ucoe5Qb+IQLKFPJDxsc2SshobzeETOh4u4f4LP6Y1BNp75ISxBVgYDpCBuEoAd9FjLcENutZrbhcjRakbjnXa3KEa2E4lQRSoY2D7JPX7AQqQKhPnFtceyJgluc/VjdtK3R2CM5fjElepBHYJjzOLusbxSbTrclKJB9y2uaKxlPOsRGNVBMA0+H058lZup3+b16wz46OSBfvAoj/wdGvk0gLQiYzvolXwL57G/kc3hqb3W03s3U0d0tVc83WPiH3zSQXuXusDMvZi8gtEmJI2Qbblwzl2XKKUzrw==",
+  "SigningCertURL" : "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-433026a4050d206028891664da859041.pem",
+  "UnsubscribeURL" : "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:610694758619:ssn_test:bdef1e4e-92c2-473a-806f-ba10d6a3edf5",
+  "MessageAttributes" : {
+    "AWS.SNS.MOBILE.MPNS.Type" : {"Type":"String","Value":"token"},
+    "AWS.SNS.MOBILE.MPNS.NotificationClass" : {"Type":"String","Value":"realtime"},
+    "AWS.SNS.MOBILE.WNS.Type" : {"Type":"String","Value":"wns/badge"}
+  }
+}
