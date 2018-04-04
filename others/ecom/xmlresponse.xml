@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ecomexpress-objects version="1.0">
+    <object pk="1" model="awb">
+        <field type="BigIntegerField" name="awb_number">1000000714</field>
+        <field type="CharField" name="orderid">DCAT-9887786767</field>
+        <field type="FloatField" name="actual_weight">0</field>
+        <field type="CharField" name="origin">Ghaziabad-GZA</field>
+        <field type="CharField" name="destination">LADWA - LAW</field>
+        <field type="CharField" name="current_location_name">Ghaziabad-GZA</field>
+        <field type="CharField" name="current_location_code">GZA</field>
+        <field type="CharField" name="customer">Ecom Express Private Limited - 32012</field>
+        <field type="CharField" name="consignee">Sukesh Sareen</field>
+        <field type="CharField" name="pickupdate">11-Jul-2017</field>
+        <field type="CharField" name="status">Delivered / Closed</field>
+        <field type="CharField" name="tracking_status">Delivered</field>
+        <field type="CharField" name="reason_code">999 - Delivered</field>
+        <field type="CharField" name="reason_code_description">Delivered</field>
+        <field type="CharField" name="reason_code_number">999</field>
+        <field type="CharField" name="receiver"></field>
+        <field type="CharField" name="expected_date" ></field>
+        <field type="CharField" name="last_update_date" >11-Jul-2017</field>
+        <field type="CharField" name="delivery_date" ></field>
+        <field type="CharField" name="ref_awb" >None</field>
+        <field type="CharField" name="rts_shipment" >0</field>
+        <field type="CharField" name="system_delivery_update" ></field>
+        <field type="CharField" name="rts_system_delivery_status" ></field>
+        <field type="CharField" name="rts_reason_code_number"></field>
+        <field type="CharField" name="rts_last_update"></field>
+        <field type="CharField" name="pincode" >431004</field>
+        <field type="CharField" name="city" >Ladwa</field>
+        <field type="CharField" name="state" >Haryana</field>
+        <field name="scans">
+            <object pk="1" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 17:40 </field>
+                <field type="CharField" name="status">Shipment Picked Up</field>
+                <field type="CharField" name="reason_code">999 - Delivered</field>
+                <field type="CharField" name="reason_code_number">0011</field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">GZA</field>
+                <field type="CharField" name="location_city">GHAZIABAD</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">GHAZIABAD</field>
+                <field type="CharField" name="Employee">Ajay Pal - 33721</field>
+            </object>
+            <object pk="2" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 15:45 </field>
+                <field type="CharField" name="status">Shipment Picked Up</field>
+                <field type="CharField" name="reason_code">2601 - Field Pickup Done</field>
+                <field type="CharField" name="reason_code_number">0011</field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">GZA</field>
+                <field type="CharField" name="location_city">GHAZIABAD</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">GHAZIABAD</field>
+                <field type="CharField" name="Employee">Ajay Pal - 33721</field>
+            </object>
+            <object pk="3" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 15:45 </field>
+                <field type="CharField" name="status"></field>
+                <field type="CharField" name="reason_code">2601 - Field Pickup Done</field>
+                <field type="CharField" name="reason_code_number">2601</field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">GZA</field>
+                <field type="CharField" name="location_city">GHAZIABAD</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">GHAZIABAD</field>
+                <field type="CharField" name="Employee">Ajay Pal - 33721</field>
+            </object>
+            <object pk="4" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 11:46 </field>
+                <field type="CharField" name="status"></field>
+                <field type="CharField" name="reason_code"> - </field>
+                <field type="CharField" name="reason_code_number">014</field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">GZA</field>
+                <field type="CharField" name="location_city">GHAZIABAD</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">GHAZIABAD</field>
+                <field type="CharField" name="Employee">Gopal Singh Meena - 32886</field>
+            </object>
+            <object pk="5" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 11:32 </field>
+                <field type="CharField" name="status"></field>
+                <field type="CharField" name="reason_code"> - </field>
+                <field type="CharField" name="reason_code_number">013</field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">DLN</field>
+                <field type="CharField" name="location_city">DELHI</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">DELHI</field>
+                <field type="CharField" name="Employee">Gopal Singh Meena - 32886</field>
+            </object>
+            <object pk="6" model="scan_stages">
+                <field type="DateTimeField" name="updated_on">11 Jul, 2017, 11:02 </field>
+                <field type="CharField" name="status"></field>
+                <field type="CharField" name="reason_code"> - </field>
+                <field type="CharField" name="reason_code_number"></field>
+                <field type="CharField" name="scan_status">HOLD</field>
+                <field type="CharField" name="location">GZA</field>
+                <field type="CharField" name="location_city">GHAZIABAD</field>
+                <field type="CharField" name="location_type">Service Center</field>
+                <field type="CharField" name="city_name">GHAZIABAD</field>
+                <field type="CharField" name="Employee">None</field>
+            </object>
+        </field>
+    </object>
+</ecomexpress-objects>
