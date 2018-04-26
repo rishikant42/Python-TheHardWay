@@ -1,6 +1,5 @@
 a = raw_input('file1?')
 x = open(a)
-print x.read()
 
 b = raw_input('file2?')
 y = open(b,'w')

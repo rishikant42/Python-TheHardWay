@@ -1,24 +1,48 @@
 import requests
 import json
 import urllib
+import xml.etree.ElementTree as ET
 
 rev_url = "http://staging.ecomexpress.in/apiv2/manifest_awb_rev_v2/"
 awb_url = 'http://staging.ecomexpress.in/apiv2/fetch_awb/'
+track_url = "http://staging.ecomexpress.in/track_me/api/mawbd/"
 username = "ecomexpress"
 pswd = "Ke$3c@4oT5m6h#$"
-
 
 awb_data = {'username': urllib.quote(username),
         'password': urllib.quote(pswd),
         'type': 'REV',
-        'count': 1,
+        'count': 5,
         }
 
 
-r = requests.post(awb_url, awb_data)
-ecom_express_data = r.json()
+# r = requests.post(url=awb_url, data=awb_data)
+# ecom_express_data = r.json()
+#
+# awb_number = ecom_express_data["awb"][0]
+#
+# print ecom_express_data
 
-awb_number = ecom_express_data["awb"][0]
+data = {
+        'username': urllib.quote(username),
+        'password': urllib.quote(pswd),
+        'awb': '1000000714,1000000715,1000000716',
+        }
+r = requests.post(url=track_url, data=data)
+xml = str(r.text)
+# print xml
+
+# root = ET.fromstring(xml)
+#
+# for r in root:
+#     print r.find("*[@name='awb_number']").text
+#     print r.find("*[@name='tracking_status']").text
+#     print r.find("*[@name='last_update_date']").text
+#     print "\n"
+#
+# f = open('track.xml', 'w')
+# f.write(xml)
+# f.close()
 
 details = {"ECOMEXPRESS-OBJECTS": {
     "SHIPMENT": {

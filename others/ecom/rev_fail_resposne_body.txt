@@ -1,0 +1,42 @@
+==> Given two examples show the response-body and status-code in case of request fail
+
+================================== RESPONSE-BODY-1 =========================
+
+HTTP-Response-Status-code: 200
+
+Response-Body:
+
+{
+  "shipments": [
+    {
+      "reason": "'REVPICKUP_NAME'",
+      "order_number": "",
+      "awb": "",
+      "success": false
+    }
+  ]
+}
+
+
+================================== RESPONSE-BODY-2 =========================
+
+HTTP-Response-Status-code: 200
+
+Response-Body:
+
+{
+  "RESPONSE-OBJECTS": {
+    "RESPONSE-COMMENT": "Reasons along with each awb",
+    "AIRWAYBILL-OBJECTS": {
+      "AIRWAYBILL": {
+        "order_id": "500765301-001",
+        "error_list": {
+          "reason_comment": "INVALID_AIRWAYBILL_NUMBER,",
+          "wrong_awb": "Invalid airwaybill number"
+        },
+        "success": "False",
+        "airwaybill_number": "123"
+      }
+    }
+  }
+}
