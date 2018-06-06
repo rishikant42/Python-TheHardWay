@@ -1,5 +1,8 @@
+from sys import argv
+
 from Crypto.PublicKey import RSA
 from Crypto import Random
+from Crypto.Hash import SHA256
 
 def genrate_keys():
     random_generator = Random.new().read
@@ -41,4 +44,15 @@ def import_keys():
     print plain
 
 
-import_keys()
+def create_pswd():
+    pswd = str(argv[1])
+    digest = SHA256.new(pswd).hexdigest()
+    print digest
+
+
+def verify_pswd():
+    pswd = str(argv[1])
+    digest = SHA256.new(pswd).hexdigest()
+    print digest == str(argv[2])
+
+verify_pswd()
