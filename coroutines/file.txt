@@ -1,0 +1,130 @@
+ Manpage for cryptoo
+ cryptoo 1 "10 June 2018" "1.0" "cryptoo manual"
+ NAME
+ptoo \- A CLI for cryptographic operations.
+ SYNOPSIS
+ptoo [--version | -v] [--help | -h]
+
+ptoo generate_hash --msg <arg> --algo <arg>
+
+ptoo verify_hash --msg <arg> --digest <arg> --algo <arg>
+
+ptoo generate_key_pairs
+
+ptoo encrypt --textfile <painfile> --pubkey <publickey>
+
+ptoo decrypt --cipherfile <cipherfile> --pvtkey <privatekey>
+
+ptoo enc_des3 --textfile <painfile> --secret <secrettext>
+
+ptoo dec_des3 --cipherfile <cipherfile> --secret <secrettext>
+
+ptoo sign --textfile <plainfile> --pvtkey <privatekey>
+
+ptoo sign_verify --textfile <plainfile> --pubkey <publickey> --signfile <signature>
+ DESCRIPTION
+ cryptoo
+a command line tool for cryptographic operations. It can be used for
+--> Generate hash
+--> Verify hash
+--> Generate Private-Public key pairs
+--> Encrypt file
+--> Decrypt file
+--> Public key encryption
+--> Digital signature and verification
+ EXAMPLE
+ Cryptographic Hash
+
+ryptoo generate_hash --msg mypassword
+
+01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8
+
+ryptoo verify_hash --digest 89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8 --msg mypassword
+
+e
+
+can specify hashing algorithm from command line. Current choices are sha256, sha512 and md5. Default hashing algo is sha256.
+
+ryptoo generate_hash --msg mypassword --algo md5
+
+19d7beeabb9260a5c854bc85b3e44
+
+ryptoo verify_hash --msg mypassword --digest 34819d7beeabb9260a5c854bc85b3e44 --algo md5
+
+e
+ Symmetric encryption
+cho "Hello world" > in.txt
+
+ryptoo enc_des3 --textfile in.txt --secret mysecret
+
+hertext file 'cipher.txt' is successfully created
+
+
+s cipher.txt
+
+her.txt
+
+ryptoo dec_des3 --cipherfile cipher.txt --secret mysecret
+
+intext file 'plain.txt' is successfully created
+
+at plain.txt
+
+lo world
+
+ Asymmetric encryption
+ryptoo generate_key_pairs
+
+vate-Public key pairs (pvtkey.pem & pubkey.pem) are successfully created
+
+ryptoo encrypt --textfile in.txt --pubkey pubkey.pem
+
+hertext file 'cipher.txt' is successfully created
+
+ryptoo decrypt --cipherfile cipher.txt --pvtkey pvtkey.pem
+
+intext file 'plain.txt' is successfully created
+
+ Digital sign & verify
+cho "Hello world" > in.txt
+
+ryptoo generate_key_pairs
+
+vate-Public key pairs (pvtkey.pem & pubkey.pem) are successfully created
+
+
+ryptoo sign --pvtkey pvtkey.pem --textfile in.txt
+
+nature file 'sign.txt' is successfully created
+
+s sign.txt
+
+n.txt
+
+
+ryptoo sign_verify --pubkey pubkey.pem --textfile in.txt --signfile sign.txt 
+
+e
+
+ ToDO
+arge size file encryption-decryption.
+
+
+roper error handling.
+
+
+mplementation of JWT.
+
+
+ption to specify name of output file.
+
+
+ption to pass text from command line.
+
+
+ore hashing algo choices.
+
+ BUGS
+ps://github.com/rishikant42/Crypto-CLI
+ AUTHOR
+hi kant sharma
