@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import zbar
 
 from PIL import Image
