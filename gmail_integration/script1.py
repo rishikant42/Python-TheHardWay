@@ -34,7 +34,7 @@ def create_table(db, table):
     query = """
         CREATE TABLE {}
         (`id` INT AUTO_INCREMENT PRIMARY KEY,
-        `msg_id` VARCHAR(255),
+        `msg_id` VARCHAR(255) UNIQUE,
         `from` VARCHAR(255),
         `to` VARCHAR(255),
         `subject` TEXT,
