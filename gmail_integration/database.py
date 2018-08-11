@@ -1,24 +1,29 @@
-import os
 import MySQLdb
 
 
 class Database:
-
-    host = '127.0.0.1'
-    user = os.environ.get('DATABASE_USER')
-    password = os.environ.get('DATABASE_PASSWORD')
-    db = 'gmaildb'
-
-    def __init__(self):
-        self.connection = MySQLdb.connect(self.host, self.user, self.password, self.db)
+    def __init__(self, db_host, db_user, db_password, db_name):
+        self.connection = MySQLdb.connect(db_host, db_user, db_password, db_name)
         self.cursor = self.connection.cursor()
 
-    def create(self, query):
+    def create_table(self, query):
         self.cursor.execute(query)
 
-    def insert(self, query):
+    def is_table_exist(self, table):
+        self.cursor.execute("SHOW TABLES LIKE '{}'".format(table))
+        result = self.cursor.fetchone()
+        return True if result else False
+
+    def insert_value(self, query):
         try:
             self.cursor.execute(query)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+
+    def insert_values(self, query, data):
+        try:
+            self.cursor.executemany(query, data)
             self.connection.commit()
         except:
             self.connection.rollback()
