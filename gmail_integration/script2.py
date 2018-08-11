@@ -27,6 +27,10 @@ RULE_NUMBER = "rule1"
 
 
 def create_sql_fetch_query(rules_set, overall_predicate):
+    """
+    Read all rules, convert them in sql query form.
+    Combine queries as per predicate to create a single sql query.
+    """
     queries = []
     for rule in rules_set:
         field_name = rule[0]
@@ -53,7 +57,11 @@ def create_sql_fetch_query(rules_set, overall_predicate):
 
     return sql_query
 
+
 def take_action(action, msg_ids, label=None):
+    """
+    take specified action on msg_ids
+    """
     inbox = GmailInbox(SCOPE)
 
     if action == "mark_as_read":

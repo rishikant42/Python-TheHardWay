@@ -14,8 +14,15 @@ TABLE_NAME = 'Inbox'
 
 
 def inbox_msg_details():
+    """
+    Fetch lates 100 message-id from gamil inbox.
+    Returm message details of each ID.
+    """
     inbox = GmailInbox(SCOPE)
 
+    # msg_ids = inbox.get_all_inbox_msg_ids(USER_ID)
+
+    # Lets fetch only 100 message IDs
     msg_ids = inbox.get_message_ids(USER_ID)
 
     msg_details = inbox.get_message_details(USER_ID, msg_ids)
@@ -42,6 +49,8 @@ def create_table(db, table):
 
 
 def insert_data(db, table):
+    "Fetch data from gmail & insert in DB"
+
     query = """
         INSERT INTO {}
         (`msg_id`, `from`, `to`, `subject`, `snippet`, `date`)

@@ -10,6 +10,9 @@ class Database:
         self.cursor.execute(query)
 
     def is_table_exist(self, table):
+        """
+        check if specified table exist in database
+        """
         self.cursor.execute("SHOW TABLES LIKE '{}'".format(table))
         result = self.cursor.fetchone()
         return True if result else False
@@ -22,6 +25,9 @@ class Database:
             self.connection.rollback()
 
     def insert_values(self, query, data):
+        """
+        Take data as dict & save all info in table as per query
+        """
         try:
             self.cursor.executemany(query, data)
             self.connection.commit()
@@ -29,7 +35,7 @@ class Database:
             self.connection.rollback()
 
     def fetch(self, query):
-        cursor = self.connection.cursor( MySQLdb.cursors.DictCursor )
+        cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute(query)
 
         return cursor.fetchall()

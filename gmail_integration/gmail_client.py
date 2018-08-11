@@ -1,8 +1,6 @@
-import base64
-import time
 import dateutil.parser as parser
 
-from apiclient import discovery, errors
+from apiclient import discovery
 from oauth2client import file, client, tools
 from httplib2 import Http
 
@@ -20,6 +18,9 @@ class GmailInbox:
         self.service = service
 
     def get_message_ids(self, user_id):
+        """
+        Fetch 100 latest message id from inbox
+        """
         msgs = []
 
         response = self.service.users().messages().list(
@@ -30,13 +31,16 @@ class GmailInbox:
         msgs.extend(response['messages'])
 
         msg_ids = [m['id'] for m in msgs]
-        return msg_ids[:2]
+        return msg_ids
 
     def get_message_details(self, user_id, msg_ids):
+        """
+        Return message details of specied msg IDs
+        """
         result = []
 
         for msg_id in msg_ids:
-            temp_dict = { }
+            temp_dict = {}
             temp_dict['msg_id'] = msg_id
 
             message = self.service.users().messages().get(userId=user_id, id=msg_id).execute()
@@ -44,7 +48,7 @@ class GmailInbox:
             payload = message['payload']
             headers = payload['headers']
 
-            for header in headers: # getting the Subject
+            for header in headers:
                 if header['name'] == 'Subject':
                     msg_subject = header['value']
                     temp_dict['subject'] = msg_subject.encode('utf-8')
@@ -71,12 +75,41 @@ class GmailInbox:
             result.append(temp_dict)
         return result
 
+    def get_all_inbox_msg_ids(self, user_id):
+        """
+        Fetch all msg-IDs from inbox
+        """
+        msgs = []
+
+        response = self.service.users().messages().list(
+                userId=user_id,
+                labelIds=[self.LABEL_ONE, ],
+                ).execute()
+
+        if 'messages' in response:
+            msgs.extend(response['messages'])
+
+        while 'nextPageToken' in response:
+            page_token = response['nextPageToken']
+
+            response = self.service.users().messages().list(
+                    userId=user_id,
+                    labelIds=[self.LABEL_ONE, ],
+                    pageToken=page_token
+                    ).execute()
+
+            msgs.extend(response['messages'])
+
+        msg_ids = [m['id'] for m in msgs]
+
+        return msg_ids
+
     def mark_as_read(self, user_id, msg_ids):
         for msg_id in msg_ids:
             self.service.users().messages().modify(
                 userId=user_id,
                 id=msg_id,
-                body={ 'removeLabelIds': ['UNREAD']}).execute()
+                body={'removeLabelIds': ['UNREAD']}).execute()
 
         return None
 
@@ -85,7 +118,7 @@ class GmailInbox:
             self.service.users().messages().modify(
                 userId=user_id,
                 id=msg_id,
-                body={ 'addLabelIds': ['UNREAD']}).execute()
+                body={'addLabelIds': ['UNREAD']}).execute()
 
         return None
 
@@ -94,7 +127,7 @@ class GmailInbox:
             self.service.users().messages().modify(
                 userId=user_id,
                 id=msg_id,
-                body={ 'removeLabelIds': ['INBOX']}).execute()
+                body={'removeLabelIds': ['INBOX']}).execute()
 
         return None
 
@@ -103,7 +136,7 @@ class GmailInbox:
             self.service.users().messages().modify(
                 userId=user_id,
                 id=msg_id,
-                body={ 'addLabelIds': ['INBOX']}).execute()
+                body={'addLabelIds': ['INBOX']}).execute()
 
         return None
 
@@ -112,6 +145,6 @@ class GmailInbox:
             self.service.users().messages().modify(
                 userId=user_id,
                 id=msg_id,
-                body={ 'addLabelIds': [label]}).execute()
+                body={'addLabelIds': [label]}).execute()
 
         return None
