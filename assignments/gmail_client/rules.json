@@ -1,0 +1,26 @@
+{
+	"rule1": {
+		"rules": [
+			["from", "contains", "tenmiles.com"],
+			["subject", "contains", "tenmiles"]
+		],
+		"overall_predicate": "all",
+		"action": "mark_as_read"
+	},
+	"rule2": {
+		"rules": [
+			["to", "does_not_contain", "tenmiles.com"],
+			["subject", "does_not_contain", "tenmiles"]
+		],
+		"overall_predicate": "any",
+		"action": "archive_message"
+	},
+	"rule3": {
+		"rules": [
+			["date", "less_than", "2"],
+			["to", "equal", "myemail@gmail.com"]
+		],
+		"overall_predicate": "all",
+		"action": "mark_as_unread"
+	}
+}
